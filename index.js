@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent]
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages]
 });
 
 //List of Commands
@@ -55,6 +55,23 @@ client.on("interactionCreate", async interaction => {
     {
         console.error(e);
         await interaction.reply({content: "There was an error executing the command"});
+    }
+});
+
+client.on("message", (message) => {
+    if (message.content === 's') {
+        const channel = client.channels.cache.get('1000942079360368714');
+
+        channel.send(
+        "---Fermi Server Mod Info---" +
+        "Last Server Update:" +
+        "3/14/2023 - Optional Mods Folder Added" +
+        "                                      " +
+        "Mods: https://github.com/Karmetic/jalpha-minecraft-server" +
+        "                                      " +
+        "Server IP: 4.tcp.ngrok.io:12527" +
+        "Server Status: Live!"
+        ).catch(console.error);
     }
 });
 
