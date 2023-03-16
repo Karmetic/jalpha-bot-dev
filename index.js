@@ -1,5 +1,8 @@
+const getLatestCommitMessage = require('./util/github.js')
+
 require('dotenv').config();
 
+commitMessage = ""
 const {REST} = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
@@ -28,11 +31,15 @@ for(const file of commandFiles)
     commands.push(command.data.toJSON());
 }
 
-client.on("ready", () => {
+client.on("ready", async() => {
+    commitMessage = await getLatestCommitMessage()
+    setInterval(() => {
+        commitMessage = getLatestCommitMessage()
+    }, 1800000);
     //Get Ids of the servers
     const guild_ids = client.guilds.cache.map(guild => guild.id);
 
-    const rest = new REST({version: '9'}).setToken(process.env.TOKEN);
+    const rest = new REST({version: '9'}).setToken(process.env.token);
     
     for (const guildId of guild_ids) 
     {
@@ -71,7 +78,8 @@ client.on("messageCreate", (message) => {
         "\nMods: https://github.com/Karmetic/jalpha-minecraft-server" +
         "\n                                      " +
         "\nServer IP: 4.tcp.ngrok.io:12527" +
-        "\nServer Status: Live!"
+        "\nServer Status: Live!" +
+        "\n\nLatest Repository Commit Message: " + commitMessage
         ).catch(console.error);
     }
 
@@ -92,4 +100,4 @@ client.on("messageCreate", (message) => {
     }
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.token);

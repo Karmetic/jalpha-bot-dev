@@ -5,3 +5,5 @@ async function getLatestCommitMessage() {
     const latestCommitMessage = commits[0].commit.message;
     return latestCommitMessage;
 }
+
+module.exports = getLatestCommitMessage;
