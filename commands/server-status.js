@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const getLatestCommitMessage = require('../util/github.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -8,6 +9,7 @@ module.exports = {
     
     async execute(interaction)
     {
+        commitMessage = await getLatestCommitMessage()
         await interaction.reply(
             "---Fermi Server Mod Info---" +
             "\nLast Server Update:" +

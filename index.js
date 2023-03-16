@@ -1,8 +1,5 @@
-const getLatestCommitMessage = require('./util/github.js')
-
 require('dotenv').config();
 
-commitMessage = ""
 const {REST} = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
@@ -32,10 +29,6 @@ for(const file of commandFiles)
 }
 
 client.on("ready", async() => {
-    commitMessage = await getLatestCommitMessage()
-    setInterval(() => {
-        commitMessage = getLatestCommitMessage()
-    }, 1800000);
     //Get Ids of the servers
     const guild_ids = client.guilds.cache.map(guild => guild.id);
 
@@ -69,4 +62,4 @@ client.on("interactionCreate", async interaction => {
 client.on("messageCreate", (message) => {
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.token);
