@@ -67,36 +67,6 @@ client.on("interactionCreate", async interaction => {
 });
 
 client.on("messageCreate", (message) => {
-    if (message.content === '!server-status') {
-        const channel = client.channels.cache.get('1000942079360368714');
-
-        channel.send(
-        "---Fermi Server Mod Info---" +
-        "\nLast Server Update:" +
-        "\nLatest Repository Commit Message: " + commitMessage +
-        "\n                                      " +
-        "\nMods: https://github.com/Karmetic/jalpha-minecraft-server" +
-        "\n                                      " +
-        "\nServer IP: 4.tcp.ngrok.io:12527" +
-        "\nServer Status: Live!"
-        ).catch(console.error);
-    }
-
-    if (message.content === "!server-ip") {
-        const channel = client.channels.cache.get('1000942079360368714');
-
-        axios({
-            method: 'get',
-            url: 'http://localhost:4040/api/tunnels',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then(response => {
-            console.log(response.data);
-          });
-
-        //channel.send(ipData);
-    }
 });
 
 client.login(process.env.TOKEN);
