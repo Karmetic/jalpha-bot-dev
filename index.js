@@ -73,13 +73,12 @@ client.on("messageCreate", (message) => {
         channel.send(
         "---Fermi Server Mod Info---" +
         "\nLast Server Update:" +
-        "\n3/14/2023 - Optional Mods Folder Added" +
+        "\nLatest Repository Commit Message: " + commitMessage +
         "\n                                      " +
         "\nMods: https://github.com/Karmetic/jalpha-minecraft-server" +
         "\n                                      " +
         "\nServer IP: 4.tcp.ngrok.io:12527" +
-        "\nServer Status: Live!" +
-        "\n\nLatest Repository Commit Message: " + commitMessage
+        "\nServer Status: Live!"
         ).catch(console.error);
     }
 
@@ -100,4 +99,4 @@ client.on("messageCreate", (message) => {
     }
 });
 
-client.login(process.env.token);
+client.login(process.env.TOKEN);
