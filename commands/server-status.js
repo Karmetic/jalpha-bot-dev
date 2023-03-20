@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const getLatestCommitMessage = require('../util/github.js')
+const getLatestCommit = require('../util/github.js')
+const getServerStats = require('../util/server.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,16 +10,28 @@ module.exports = {
     
     async execute(interaction)
     {
-        commitMessage = await getLatestCommitMessage()
+        commit = await getLatestCommit()
+        server = await getServerStats('6.tcp.ngrok.io', 19490)
+        serverStatus = server.online == true ? "Live" : "Offline" 
+
         await interaction.reply(
-            "---Fermi Server Mod Info---" +
-            "\nLast Server Update:" +
-            "\nLatest Repository Commit Message: " + commitMessage +
-            "\n                                      " +
-            "\nMods: https://github.com/Karmetic/jalpha-minecraft-server" +
-            "\n                                      " +
-            "\nServer IP: 6.tcp.ngrok.io:19490" +
-            "\nServer Status: Live!"
+            "---Fermi Server Mod Info---" + "\n" + 
+            "\nLast Server Update:" + commit.commit.author.date + 
+            "\nLatest Repository Commit Message: " + commit.commit.message +
+            "\n" +
+            "\nMods: https://github.com/Karmetic/jalpha-minecraft-server" + "\n" + 
+            "\n" +
+            "Server Information:" + 
+            "\n---Server IP: " + server.address + ":" + server.port + 
+            "\n---Server Version: " + server.version + 
+            "\n---Server MOTD: " + server.motd +
+            "\n---Server Latency: " + server.latency + 
+            "\n---Server Players: " + server.current_players + "/" + server.max_players + 
+            "\n---Server Status: " + serverStatus
+            
+            
+            // "\nServer IP (Updated 12:00 AM 3/17/2022): 2.tcp.ngrok.io:18323" +
+            // "\nServer Status: Live!"
             );
     }
 }
