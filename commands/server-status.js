@@ -11,7 +11,7 @@ module.exports = {
     async execute(interaction)
     {
         commit = await getLatestCommit()
-        server = await getServerStats('6.tcp.ngrok.io', 19490)
+        server = await getServerStats('8.tcp.ngrok.io', 12575)
         serverStatus = server.online == true ? "Live" : "Offline" 
 
         await interaction.reply(
