@@ -17,7 +17,7 @@ module.exports = {
             "\n                                      " +
             "\nMods: https://github.com/Karmetic/jalpha-minecraft-server" +
             "\n                                      " +
-            "\nServer IP (Updated 12:00 AM 3/17/2022): 2.tcp.ngrok.io:18323" +
+            "\nServer IP: 6.tcp.ngrok.io:19490" +
             "\nServer Status: Live!"
             );
     }
