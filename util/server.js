@@ -1,10 +1,10 @@
-var ms = require('minestat')
+var msu = require('minecraft-server-util');
 
 async function getServerStats(address, port) {
-    return new Promise((resolve, reject) => {
-        ms.init(address, port, function (result) {
-            resolve(result);
-        });
+    return new Promise((resolve) => {
+        msu.queryFull(address, port)
+        .then((result) => resolve(result))
+        .catch((e) => console.log(e));
     })
 }
 

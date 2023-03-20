@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const getLatestCommit = require('../util/github.js')
 const getServerStats = require('../util/server.js')
 
+
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('server-status')
@@ -22,11 +23,12 @@ module.exports = {
             "\nMods: https://github.com/Karmetic/jalpha-minecraft-server" + "\n" + 
             "\n" +
             "Server Information:" + 
-            "\n---Server IP: " + server.address + ":" + server.port + 
+            "\n---Server IP: " + server.hostIP + ":" + server.hostPort + 
             "\n---Server Version: " + server.version + 
             "\n---Server MOTD: " + server.motd +
             "\n---Server Latency: " + server.latency + 
-            "\n---Server Players: " + server.current_players + "/" + server.max_players + 
+            "\n---Server Players: " + server.players.online + "/" + server.players.max + 
+            "\n---Players Online: " + server.players.list +
             "\n---Server Status: " + serverStatus
             
             
